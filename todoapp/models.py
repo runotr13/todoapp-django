@@ -1,4 +1,3 @@
-from abc import update_abstractmethods
 from django.db import models
 
 # Create your models here.
