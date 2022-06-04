@@ -1,0 +1,73 @@
+{% extends "todos/base.html" %}
+{% block container %}
+{% load crispy_forms_tags %}
+
+<style>
+    form > div{
+        font-size: 1.3em;
+        font-weight: bold;
+        color:white;
+    }
+    h1 {
+      color:white;
+      display: flex;
+    justify-content: center;
+    align-items: center;
+
+    }
+    form > div >  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+}
+.inputbtn{
+  float: right;
+}
+    
+</style>
+
+    
+    <form action="" method="POST" enctype="multipart/form-data" class="w-100 font-weight-bold text-capitalize ">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <input type='submit' value="Add User"  class="btn btn-outline-dark mt-3 mb-3 inputbtn text-white">
+    </form>
+
+
+
+     
+
+<table class="table table-striped table-dark w-75 rounded ">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">Branche</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+        {% for i in todo  %} 
+      <tr>
+        <td>{{ i.first_name }}</td>
+        <td>{{ i.Location }}</td>
+        <td>{{ i.branche }}</td>
+        <td>
+          <a href="{% url 'todoupdate' i.id %}">
+            <input type="submit" value="Edit User" class="btn btn-outline-primary">
+        </a>
+      </td>
+        <td><a href="{% url 'tododelete' i.id %}">
+            <input type="submit" value="Delete User" class="btn btn-outline-danger">
+        </a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+
+
+{% endblock container %}
